@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+    ">
+
+    <bean id="firstClassicTrack" class="org.example.model.MusicTrack">
+        <property name="author" value="Шопен"/>
+        <property name="name" value="Ноктюрн 2"/>
+    </bean>
+
+    <bean id="secondClassicTrack" class="org.example.model.MusicTrack">
+        <property name="author" value="Бетховен"/>
+        <property name="name" value="Симфония номер 5"/>
+    </bean>
+
+    <bean id="firstRockTrack" class="org.example.model.MusicTrack">
+        <property name="author" value="Metallica"/>
+        <property name="name" value="Nothing else matters"/>
+    </bean>
+
+    <bean id="secondRockTrack" class="org.example.model.MusicTrack">
+        <property name="author" value="Scorpions"/>
+        <property name="name" value="Wind of change"/>
+    </bean>
+
+    <bean id="rockPlayer" class="org.example.service.RockPlayer">
+        <constructor-arg>
+            <list>
+                <ref bean="firstRockTrack"/>
+                <ref bean="secondRockTrack"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="classicPlayer" class="org.example.service.ClassicPlayer">
+        <constructor-arg>
+            <list>
+                <ref bean="firstClassicTrack"/>
+                <ref bean="secondClassicTrack"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="musicPlayer" class="org.example.service.MusicPlayerServiceImpl">
+        <constructor-arg>
+            <list>
+                <ref bean="rockPlayer"/>
+                <ref bean="classicPlayer"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="str" class="java.lang.String">
+        <constructor-arg value="musicPlayer"/>
+    </bean>
+
+    <context:annotation-config/>
+</beans>
+
